@@ -1,5 +1,5 @@
 const between = (x, min, max) => {
-    return x >= min && x <= max || (max + 1) === x || (max - 1) === x || (min + 1) === x || (min - 1) === x 
+    return x >= min && x <= max
 }
 
 function sumIntervals(intervals) {
@@ -65,11 +65,11 @@ function sumIntervals(intervals) {
 
         if (!hasOverlapped) {
             rangeAns = augmentedIntervals.reduce((acc, numArr) => {
-                const contendingNumber = numArr[1] - numArr[0]
+                const diff = numArr[1] - numArr[0]
 
-                if (acc === null || contendingNumber > acc) acc = contendingNumber
+                acc += diff
                 return acc
-            }, null)
+            }, 0)
         }
     }
 
