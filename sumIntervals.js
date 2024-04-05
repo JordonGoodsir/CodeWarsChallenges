@@ -127,15 +127,6 @@ function sumIntervalsV2(intervals) {
                         console.error('in here')
                         const newInterval = [lowest, highest]
 
-                        //delete the other 2 intervals
-                        // if (i > intervalArrayIndex) {
-                        //     augmentedIntervals.splice(i, 1)
-                        //     augmentedIntervals.splice(intervalArrayIndex, 1)
-                        // } else {
-                        //     augmentedIntervals.splice(intervalArrayIndex, 1)
-                        //     augmentedIntervals.splice(i, 1)
-                        // }
-
                         augmentedIntervals[intervalArrayIndex].push(null)
                         augmentedIntervals[i].push(null)
 
@@ -151,7 +142,7 @@ function sumIntervalsV2(intervals) {
     }
 
     rangeAns = augmentedIntervals.reduce((acc, numArr) => {
-        if(numArr.length !== 2) return acc
+        if (numArr.length !== 2) return acc
         const diff = numArr[1] - numArr[0]
 
         acc += diff
@@ -168,8 +159,65 @@ function sumIntervalsV2(intervals) {
     // if no overlap in whole array then loop through and see which range has most
 }
 
-console.error(sumIntervalsV2([
-    [1, 4],
-    [7, 10],
-    [3, 5]
+
+async function sumIntervalsV3(intervals) {
+    let ansArr = []
+    let augmentedIntervals = [...intervals].sort((a, b) => a[1] - b[1])
+    let changes = true
+
+    while (changes) {
+        const startAnsLength = ansArr.length
+        augmentedIntervals = [...ansArr]
+        ansArr = []
+
+
+        for (let i = 0; i < augmentedIntervals.length; i++) {
+
+            const currentHighNumber = augmentedIntervals?.[i]?.[1]
+            const nextLowNumber = augmentedIntervals?.[i + 1]?.[0]
+
+            // combonation
+            if ((augmentedIntervals.length - 1) !== i && currentHighNumber > nextLowNumber) {
+                const nextHighNumber = augmentedIntervals[i + 1][1]
+                const currentLowNumber = augmentedIntervals[i][0]
+                augmentedIntervals.splice((i + 1), 1, [Math.min(currentLowNumber, nextLowNumber), nextHighNumber])
+                ansArr.push()
+            } else {
+                ansArr.push(augmentedIntervals[i])
+            }
+        }
+
+        console.error(ansArr)
+
+        console.error('startAnsLength', startAnsLength)
+
+        console.error('ansArr.length', ansArr.length)
+
+
+        if (startAnsLength !== 0 && startAnsLength === ansArr.length) changes = false
+
+        await new Promise(r => setTimeout(r, 2000));
+    }
+
+
+    return ansArr.reduce((acc, numArr) => {
+        const diff = numArr[1] - numArr[0]
+
+        acc += diff
+        return acc
+    }, 0)
+}
+
+console.error(sumIntervalsV3([
+    [1, 5],
+    [1, 6],
+    [5, 11],
+    [16, 19],
+    [10, 20]
 ]))
+
+
+// get list of all highest numbers
+
+// loop through high numbers
+// if 1 high number i lower than another and the high number is higher or eual to the lower number
