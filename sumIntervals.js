@@ -160,16 +160,18 @@ function sumIntervalsV2(intervals) {
 }
 
 
-async function sumIntervalsV3(intervals) {
+function sumIntervalsV3(intervals) {
     let ansArr = []
     let augmentedIntervals = [...intervals].sort((a, b) => a[1] - b[1])
     let changes = true
+    let toPush = []
 
     while (changes) {
+        if (ansArr.length === 1) break
+        if (ansArr.length) augmentedIntervals = [...ansArr]
         const startAnsLength = ansArr.length
-        augmentedIntervals = [...ansArr]
-        ansArr = []
 
+        ansArr = []
 
         for (let i = 0; i < augmentedIntervals.length; i++) {
 
@@ -180,23 +182,21 @@ async function sumIntervalsV3(intervals) {
             if ((augmentedIntervals.length - 1) !== i && currentHighNumber > nextLowNumber) {
                 const nextHighNumber = augmentedIntervals[i + 1][1]
                 const currentLowNumber = augmentedIntervals[i][0]
-                augmentedIntervals.splice((i + 1), 1, [Math.min(currentLowNumber, nextLowNumber), nextHighNumber])
-                ansArr.push()
+
+                const newRange = [Math.min(currentLowNumber, nextLowNumber), nextHighNumber]
+                augmentedIntervals.splice((i + 1), 1, newRange)
+                toPush = newRange
             } else {
-                ansArr.push(augmentedIntervals[i])
+                if (toPush.length) {
+                    ansArr.push(toPush)
+                    toPush = []
+                } else ansArr.push(augmentedIntervals[i])
             }
         }
 
-        console.error(ansArr)
-
-        console.error('startAnsLength', startAnsLength)
-
-        console.error('ansArr.length', ansArr.length)
-
-
         if (startAnsLength !== 0 && startAnsLength === ansArr.length) changes = false
 
-        await new Promise(r => setTimeout(r, 2000));
+        // await new Promise(r => setTimeout(r, 2000));
     }
 
 
