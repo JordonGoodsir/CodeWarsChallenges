@@ -208,16 +208,37 @@ function sumIntervalsV3(intervals) {
     }, 0)
 }
 
-console.error(sumIntervalsV3([
-    [1, 5],
-    [1, 6],
-    [5, 11],
-    [16, 19],
-    [10, 20]
-]))
+// console.error(sumIntervalsV3([
+//     [1, 5],
+//     [1, 6],
+//     [5, 11],
+//     [16, 19],
+//     [10, 20]
+// ]))
 
 
 // get list of all highest numbers
 
 // loop through high numbers
 // if 1 high number i lower than another and the high number is higher or eual to the lower number
+
+const squirrel = (h, H, S) => {
+    // h is vertical height squirrel climbed
+    // H is the height of the tree
+    // S is the circumferance
+
+
+}//coding and coding.. shorter and more shorter..  good luck! ;-)
+
+function solution(list) {
+    // TODO: complete solution 
+
+    // console.error(list.sort((a, b) => { 
+    //     console.error((Math.abs((a - b)) + 1) >= 3)
+    //     return (Math.abs((a - b)) + 1) >= 3
+    // }))
+    // console.error(Math.abs(-10 - -8) + 1)
+}
+
+// solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20])
+// returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
