@@ -43,7 +43,7 @@ convertQueryToMap('user.name.firstname=Bob&user.name.lastname=Smith&user.favorit
 // Expected: { a: 'a&b=c?' }, instead got: { a: 'a%26b%3Dc%3F' }
 
 
-console.error(String.fromCharCode('3D'))
+// console.error(String.fromCharCode('3D'))
 // {
 //     'user': {
 //       'name': {
